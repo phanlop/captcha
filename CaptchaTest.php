@@ -88,8 +88,6 @@ class CaptchaTest extends PHPUnit_Framework_TestCase {
 		new Captcha(1,1,3,2);
 	}
 	
-	
-	
 }
 
 

@@ -17,10 +17,8 @@ class Captcha {
 		}
 	}
 	
-	
-	
 	function toString() {
-		return "One + 1";
+		return $this->getLeftOperand().' '.$this->getOperation().' '.$this->getRightOperand();
 	}
 	
 	private function getNumberText($number){
