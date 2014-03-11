@@ -1,13 +1,23 @@
 <?php
 class Captcha {
 	
+	const PLUS = 1;
+	const MULTIPLY = 2;
+	const MINUS = 3;
+		
 	function __construct($pattern, $leftOperand, $operator, $rightOperand){
 		$this->listNumberWithString = array(1=>"One",2=>"Two",3=>"Three",4=>"Four",5=>"Five",6=>"Six",7=>"Seven",8=>"Eight",9=>"Nine");
 		$this->operator = $operator;
 		$this->pattern = $pattern;
 		$this->rightOperand = $rightOperand;
 		$this->leftOperand = $leftOperand;
+		
+		if($this->operator == self::MINUS && $this->rightOperand > $this->leftOperand){
+			throw new InvalidArgumentException('Right operand greater than left operand');
+		}
 	}
+	
+	
 	
 	function toString() {
 		return "One + 1";
@@ -26,28 +36,26 @@ class Captcha {
 	
 	function getOperation() {
 		switch ($this->operator){
-			case 1:
+			case self::PLUS:
 				return "+";
-			case 2:
+			case self::MULTIPLY:
 				return "*";
-			case 3:
+			case self::MINUS:
 				return "-";
 		}
 	}
-	
 	
 	function getRightOperand() {
 		return $this->isLeftTextNumberPattern() ? $this->rightOperand : $this->getNumberText($this->rightOperand);
 	}
 
 	function getResult() {
-
 		switch ($this->operator){
-			case 1:
+			case self::PLUS:
 				return $this->leftOperand + $this->rightOperand;
-			case 2:
+			case self::MULTIPLY:
 				return $this->leftOperand * $this->rightOperand;
-			case 3:
+			case self::MINUS:
 				return $this->leftOperand - $this->rightOperand;
 		}
 		

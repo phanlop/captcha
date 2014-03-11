@@ -80,6 +80,16 @@ class CaptchaTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals(0, (new Captcha(1,1,3,1))->getResult());
 		$this->assertEquals(5, (new Captcha(1,7,3,2))->getResult());
 	}
+	
+	/**
+	* @expectedException InvalidArgumentException
+	*/
+	function testMinusLeftShouldGreaterThanRightOperand(){
+		new Captcha(1,1,3,2);
+	}
+	
+	
+	
 }
 
 
